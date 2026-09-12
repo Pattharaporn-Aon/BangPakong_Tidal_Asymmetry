@@ -1,0 +1,13 @@
+,0
+raw_records,353644.0
+duplicate_timestamps,665.0
+conflicting_duplicates_removed,1.0
+zero_values_removed,38.0
+stuck_high_values_removed(>=5.60 m),563.0
+flatline_values_removed(run>=3h),608.0
+spikes_removed_pass1,234.0
+spikes_removed_pass2,14.0
+clean_records,351212.0
+hourly_grid_points,62495.0
+hourly_missing,4010.0
+hourly_missing_pct,6.42
