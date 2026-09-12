@@ -7,12 +7,12 @@ type: software
 authors:
   # TODO complete family name and ORCID, and add co-authors in the paper's order
   - given-names: Pattharaporn
-    family-names: FAMILY-NAME
+    family-names: Thongnim
     email: pattharaporn@go.buu.ac.th
     affiliation: >-
       Department of Mathematics, Faculty of Science, Burapha University,
       Chon Buri, Thailand
-    orcid: https://orcid.org/0000-0000-0000-0000
+    orcid: https://orcid.org/0000-0001-8904-3979
 license: MIT
 repository-code: https://github.com/Pattharaporn-Aon/BangPakong_Tidal_Asymmetry
 keywords:
