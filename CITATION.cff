@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+message: If you use this code or these results, please cite the paper below.
+title: >-
+  Code and results for "Gaussian process reconstruction and seasonal change in
+  tidal non-linearity in a monsoon-influenced estuary"
+type: software
+authors:
+  # TODO complete family name and ORCID, and add co-authors in the paper's order
+  - given-names: Pattharaporn
+    family-names: FAMILY-NAME
+    email: pattharaporn@go.buu.ac.th
+    affiliation: >-
+      Department of Mathematics, Faculty of Science, Burapha University,
+      Chon Buri, Thailand
+    orcid: https://orcid.org/0000-0000-0000-0000
+license: MIT
+repository-code: https://github.com/Pattharaporn-Aon/BangPakong_Tidal_Asymmetry
+keywords:
+  - tidal asymmetry
+  - estuary
+  - Gulf of Thailand
+  - Gaussian process regression
+  - harmonic analysis
+preferred-citation:
+  type: article
+  title: >-
+    Gaussian process reconstruction and seasonal change in tidal non-linearity
+    in a monsoon-influenced estuary
+  authors:
+    - given-names: Pattharaporn
+      family-names: FAMILY-NAME
+  journal: Ocean Dynamics
+  year: 2026
+  status: submitted
