@@ -4,8 +4,7 @@ title: >-
   Code and results for "Gaussian process reconstruction and seasonal change in
   tidal non-linearity in a monsoon-influenced estuary"
 type: software
-authors: Pattharaporn Thongnim
-  # TODO complete family name and ORCID, and add co-authors in the paper's order
+authors:
   - given-names: Pattharaporn
     family-names: Thongnim
     email: pattharaporn@buu.ac.th
@@ -29,6 +28,11 @@ preferred-citation:
   authors:
     - given-names: Pattharaporn
       family-names: Thongnim
+      email: pattharaporn@buu.ac.th
+      affiliation: >-
+        Department of Mathematics, Faculty of Science, Burapha University,
+        Chon Buri, Thailand
+      orcid: https://orcid.org/0000-0001-8904-3979
   journal: Ocean Dynamics
   year: 2026
   status: submitted
