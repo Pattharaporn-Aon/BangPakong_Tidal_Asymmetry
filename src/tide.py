@@ -51,7 +51,12 @@ def amplitudes(names, coef):
     return pd.DataFrame({'constituent':names,'speed_deg_per_h':[CONST[n][0] for n in names],
                          'amplitude_m':np.hypot(a,b),'phase_deg_rel2020':np.rad2deg(np.arctan2(b,a))%360})
 
-def design_mod(t, names, mod_names=('K1','O1','M2','S2','P1','K2','N2','Q1','M4','MS4','MK3','MO3')):
+# Constituents given an annual modulation. K1, S2 and P1 are deliberately absent:
+# modulating them at one cycle per year puts a sideband exactly on S1, T2 and S1,
+# which are already in the set, and the design matrix becomes singular.
+MOD_NAMES = ('M2','N2','O1','Q1','K2','M4','MS4','MN4','MK3','MO3','M6','2MS6')
+
+def design_mod(t, names, mod_names=MOD_NAMES):
     """Harmonic design with annual modulation (x [sin, cos] of annual cycle) of main constituents."""
     X = design(t, names)
     ty = ((t - T0).total_seconds().values/86400.0)/365.25
