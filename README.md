@@ -42,6 +42,7 @@ python src/prep.py                 # quality control and the hourly series   ~1 
 python src/daily.py                # daily mean of the tidal residual        ~20 s
 python src/tidal_analysis.py       # constituents, asymmetry, M4/M2          ~1 min
 python src/spring_neap.py          # overtides at springs and neaps, a/h      <1 min
+python src/robustness_check.py     # gap-filled record: durations, amplitudes ~2 min
 python src/gp7_full_record.py      # seven kernels on the whole record       ~7 min
 python src/gp7_loo_tests.py        # paired leave-one-out tests              ~10 s
 python src/gp7_experiments.py      # the 26 withheld-data experiments        ~3 hours
@@ -66,6 +67,7 @@ python src/gp7_experiments.py 13 14 15 16 17 18 19 20 21 22 23 24 25 &
 | `src/tide.py` | The tidal machinery: 33 constituents, Doodson speeds, nodal factors *f* and *u*, the design matrix and the harmonic fit. |
 | `src/tidal_analysis.py` | Harmonic constants with moving-block bootstrap errors; high and low waters and the rise and fall durations; the M4/M2 ratio and the relative phase, by year and by season. |
 | `src/spring_neap.py` | Quarter- and sixth-diurnal amplitudes relative to the semidiurnal band from 49-hour fits, compared between springs and neaps in the wet and the dry season, and the ratio a/h in each season. |
+| `src/robustness_check.py` | Fills the missing hours with the 33-constituent prediction plus the GP-2M-SA daily mean level, then repeats the harmonic fit and the turning-point duration analysis and compares them with the observed record. Writes `results/robustness_check.csv`. |
 | `src/models.py` | Gaussian process with an explicit mean function. β is profiled out by generalised least squares and the kernel hyperparameters are fitted by maximum marginal likelihood with analytic gradients. Seven covariance structures are registered. |
 | `src/experiments.py` | The design of the 26 withheld-data experiments. |
 | `src/gp7_full_record.py` | Fits all seven to the whole record and computes the closed-form leave-one-out residual, the AIC and the trend. |
