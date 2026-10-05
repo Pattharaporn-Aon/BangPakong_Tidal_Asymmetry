@@ -1,7 +1,7 @@
 """Harmonic constants, duration asymmetry and non-linear distortion.
 
 Reads  data/processed/hourly.pkl
-Writes results/constituents_33.csv, results/duration_by_year.csv,
+Writes results/constituents_33.csv (amplitudes, Greenwich phase lags), results/duration_by_year.csv,
        results/distortion_by_period.csv and three figures.
 
 Runtime about a minute, most of it the bootstrap.
@@ -37,11 +37,27 @@ for b in range(B):
     Ab = tide.amplitudes(NAMES, cb)
     amp_b[b] = Ab.amplitude_m.values; pha_b[b] = Ab.phase_deg_rel2020.values
 wrap = ((pha_b - A0.phase_deg_rel2020.values + 180) % 360) - 180
+
+# Greenwich phase lags referenced to UTC. The harmonic fit above measures phase
+# from 00:00 local time (UTC+7) on 1 January 2020 without the equilibrium
+# argument, which is adequate for relative phases such as 2*phiM2 - phiM4 but not
+# for comparing constituents. UTide (Codiga 2011) is fitted to the same hourly
+# values and the same 33 constituents, with time converted to UTC, and supplies
+# the Greenwich phase lag g of each constituent.
+import utide
+UT_NAME = {'LAM2': 'LDA2'}
+ut = utide.solve(h.index - pd.Timedelta(hours=7), h.values, lat=13.485,
+                 constit=[UT_NAME.get(n, n) for n in NAMES], method='ols',
+                 conf_int='none', nodal=True, trend=False, verbose=False)
+g_ut = dict(zip(ut.name, ut.g))
+greenwich = [g_ut[UT_NAME.get(n, n)] for n in NAMES]
+
 pd.DataFrame({'constituent': NAMES,
               'speed_deg_h': [tide.CONST[n][0] for n in NAMES],
               'amp_cm': 100*A0.amplitude_m.values,
               'amp_se_cm': 100*amp_b.std(0, ddof=1),
-              'phase_deg': A0.phase_deg_rel2020.values,
+              'phase_greenwich_deg': greenwich,
+              'phase_rel2020_local_deg': A0.phase_deg_rel2020.values,
               'phase_se_deg': wrap.std(0, ddof=1)}
              ).sort_values('amp_cm', ascending=False).round(4).to_csv(
     RES/'constituents_33.csv', index=False)
@@ -103,9 +119,15 @@ rows = [dict(period='whole record', n=len(h), ratio=ra, rel_phase=re)]
 for y in range(2020, 2026):
     i = h.index[h.index.year == y]
     a_, r_ = distortion(i); rows.append(dict(period=str(y), n=len(i), ratio=a_, rel_phase=r_))
+# Each season is a contiguous window: the wet season runs from June to October of
+# year y and the dry season from December of year y-1 to March of year y.
+def season_index(y, lab):
+    if lab == 'wet':
+        return h.index[(h.index >= f'{y}-06-01') & (h.index < f'{y}-11-01')]
+    return h.index[(h.index >= f'{y-1}-12-01') & (h.index < f'{y}-04-01')]
 for y in range(2020, 2026):
-    for lab, mos in (('wet', [6,7,8,9,10]), ('dry', [12,1,2,3])):
-        i = h.index[(h.index.year==y) & (h.index.month.isin(mos))]
+    for lab in ('wet', 'dry'):
+        i = season_index(y, lab)
         if len(i) < 2000: continue
         a_, r_ = distortion(i); rows.append(dict(period=f'{y} {lab}', n=len(i), ratio=a_, rel_phase=r_))
 for lab, mos in (('wet pooled', [6,7,8,9,10]), ('dry pooled', [12,1,2,3])):
