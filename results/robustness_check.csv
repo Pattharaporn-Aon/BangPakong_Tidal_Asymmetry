@@ -1,0 +1,12 @@
+quantity,observed,filled
+n_rise,3931.0,4381.0
+n_fall,3958.0,4425.0
+mean_rise_h,6.2574,6.1187
+mean_fall_h,8.1182,7.9525
+asymmetry_h,1.8608,1.8338
+max_abs_amp_change_cm,,0.1141
+amp_M2_cm,56.3047,56.3055
+amp_K1_cm,65.2382,65.1241
+amp_S2_cm,27.1633,27.2181
+amp_O1_cm,41.618,41.6226
+amp_M4_cm,2.9127,2.9282
