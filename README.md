@@ -15,7 +15,7 @@ covariance structure affects the reconstruction of the gaps.
 | | |
 |---|---|
 | Tidal regime | mixed, mainly semidiurnal, form factor *F* = 1.28 |
-| Duration asymmetry | flood dominant; rise 6.26 h against fall 8.12 h, a difference of 1.86 h |
+| Duration asymmetry | flood dominant, with rise 6.26 h against fall 8.12 h, a difference of 1.86 h |
 | Trend in the asymmetry | 0.04 ± 0.05 h yr⁻¹, not distinguishable from no change |
 | Non-linear distortion | M4/M2 = 0.052, relative phase 2φ<sub>M2</sub> − φ<sub>M4</sub> = 103.2° |
 | Seasonal modulation | M2 swings 13 % over the year, the shallow-water constituents 22–37 % |
@@ -53,7 +53,7 @@ python src/summarise_experiments.py
 
 The last run but one is the slow one. It writes one file per case under
 `results/cases/`, skips cases that are already done, and merges them when all 26
-are present, so it can be interrupted or split over several processes:
+are present. The run can therefore be interrupted or split over several processes, for example
 
 ```bash
 python src/gp7_experiments.py 0 1 2 3 4 5 6 7 8 9 10 11 12 &
@@ -64,10 +64,10 @@ python src/gp7_experiments.py 13 14 15 16 17 18 19 20 21 22 23 24 25 &
 
 | Script | What it does |
 |---|---|
-| `src/prep.py` | Duplicates, zeros, saturated readings, flat runs and spikes are removed in that order and each is logged; the surviving values are interpolated onto the hour where neighbours are no more than 30 minutes apart. 353,644 raw rows leave 351,212 clean ones and 62,495 hourly values of which 4,010 are missing. |
-| `src/daily.py` | The daily mean is formed from the **residual**, not from the water level. On an incomplete day a plain average is biased, because the missing hours are not spread evenly over the tidal cycle; here that bias exceeds 0.3 m on the worst days. A day is kept only if at least 18 hours survive, leaving 2,412 of 2,605. |
+| `src/prep.py` | Duplicates, zeros, saturated readings, flat runs and spikes are removed in that order and each is logged. The surviving values are interpolated onto the hour where neighbours are no more than 30 minutes apart. 353,644 raw rows leave 351,212 clean ones and 62,495 hourly values of which 4,010 are missing. |
+| `src/daily.py` | The daily mean is formed from the **residual**, not from the water level. On an incomplete day a plain average is biased, because the missing hours are not spread evenly over the tidal cycle. Here that bias exceeds 0.3 m on the worst days. A day is kept only if at least 18 hours survive, leaving 2,412 of 2,605. |
 | `src/tide.py` | The tidal machinery: 33 constituents, Doodson speeds, nodal factors *f* and *u*, the design matrix and the harmonic fit. |
-| `src/tidal_analysis.py` | Harmonic constants with moving-block bootstrap errors; high and low waters and the rise and fall durations; the M4/M2 ratio and the relative phase, by year and by season. |
+| `src/tidal_analysis.py` | Harmonic constants with moving-block bootstrap errors, high and low waters with the rise and fall durations, and the M4/M2 ratio and the relative phase by year and by season. |
 | `src/spring_neap.py` | Quarter- and sixth-diurnal amplitudes relative to the semidiurnal band from 49-hour fits, compared between springs and neaps in the wet and the dry season, and the ratio a/h in each season. |
 | `src/robustness_check.py` | Fills the missing hours with the 33-constituent prediction plus the GP-2M-SA daily mean level, then repeats the harmonic fit and the turning-point duration analysis and compares them with the observed record. Writes `results/robustness_check.csv`. |
 | `src/fig_location_map.py` | Draws the location map (Fig. 1) from the GEBCO 2026 grid in `data/map/` and Natural Earth coastlines, which are downloaded to `data/map/naturalearth/` on the first run. Writes `figures/fig_location_map.png` and `.pdf`. |
@@ -105,6 +105,10 @@ python src/gp7_experiments.py 13 14 15 16 17 18 19 20 21 22 23 24 25 &
 | `withheld_group_means.csv` | Mean error by experiment group |
 | `withheld_paired_tests.csv` | Paired *t* and Wilcoxon tests over the 26 cases |
 | `withheld_coverage95.csv` | Coverage of the nominal 95 % interval |
+| `seasonal_modulation.csv` | Annual swing of each modulated constituent with its bootstrap interval and month of peak |
+| `spring_neap_overtides.csv` | D4/D2 and D6/D2 at springs and neaps in the wet and the dry season |
+| `a_over_h.csv` | Ratio of tidal amplitude to depth in each season for four depths |
+| `robustness_check.csv` | Durations and amplitudes from the observed and the gap-filled record |
 | `qc_log.csv` | What each quality-control rule removed |
 
 ## Data
@@ -119,4 +123,4 @@ public domain.
 
 Code is released under the MIT licence (`LICENSE`). The observations in
 `data/raw/` are the Marine Department's and are redistributed here for
-reproducibility; please credit the Department when you use them.
+reproducibility. Please credit the Department as the source of the observations.
