@@ -1,5 +1,5 @@
 file                                        bytes
-.gitignore                                  290
+.gitignore                                  226
 CITATION.cff                                1239
 LICENSE                                     1078
 README.md                                   8074
@@ -12,7 +12,7 @@ figures/fig08_duration_asymmetry.png        41468
 figures/fig09_gap_reconstruction.png        42870
 figures/fig10_kernel_comparison.png         86183
 figures/fig_location_map.png                1123324
-notebooks/BangPakong_Tidal_Asymmetry.ipynb  57759
+notebooks/BangPakong_Tidal_Asymmetry.ipynb  57758
 notebooks/README.md                         613
 requirements.txt                            101
 results/a_over_h.csv                        220
@@ -34,11 +34,11 @@ results/withheld_paired_tests.csv           345
 src/daily.py                                1888
 src/experiments.py                          2422
 src/fig_location_map.py                     8217
-src/gp7_experiments.py                      2459
+src/gp7_experiments.py                      2460
 src/gp7_full_record.py                      2000
-src/gp7_loo_tests.py                        2206
+src/gp7_loo_tests.py                        2209
 src/models.py                               5751
-src/prep.py                                 2895
+src/prep.py                                 2888
 src/robustness_check.py                     3782
 src/seasonal.py                             3741
 src/spring_neap.py                          3580
