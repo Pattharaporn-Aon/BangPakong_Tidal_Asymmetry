@@ -21,3 +21,17 @@ git. Run, in order:
 
 `src/gp7_full_record.py` additionally writes `loo_*.npy`, the leave-one-out
 residual of each covariance structure.
+
+## `map/gebco_2026_inner_gulf.nc`
+
+Water depth for the location map, cut from the GEBCO 2026 global grid
+(15 arc-second) for 12.4-14.0 N and 99.7-101.6 E. Variables `lat`, `lon` and
+`elevation` (metres, negative below sea level). Source: GEBCO Compilation Group
+(2026), https://www.gebco.net. Redistributed with attribution under the GEBCO
+terms of use.
+
+## `map/naturalearth/` (not in version control)
+
+Natural Earth 1:10m land, minor islands and rivers, and 1:50m land, downloaded
+by `src/fig_location_map.py` on its first run. Public domain,
+https://www.naturalearthdata.com.
