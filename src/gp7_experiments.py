@@ -3,7 +3,7 @@
 Writes results/withheld_experiments.csv
 
 This is the slow step: seven fits per case at O(n^3), roughly six minutes each,
-so about three hours in total. Cases may be given on the command line to split
+and about three hours in total. Cases may be given on the command line to split
 the work over several processes, for example
 
     python src/gp7_experiments.py 0 1 2 3 4 5 6 7 8 9 10 11 12

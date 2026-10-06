@@ -3,8 +3,8 @@
 Reads  data/raw/Clean_BangPaKong_2.xlsx
 Writes data/processed/clean_10min.pkl, data/processed/hourly.pkl, results/qc_log.csv
 
-The filters are applied in the order below; each one is reported in the log so
-that the effect of every rule can be seen.
+The filters are applied in the order below. Each one is reported in the log,
+which shows the effect of every rule.
 """
 import numpy as np, pandas as pd
 from pathlib import Path

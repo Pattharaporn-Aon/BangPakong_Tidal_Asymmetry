@@ -3,10 +3,10 @@
 Reads  results/gp7_full_record.csv and data/processed/loo_*.npy
 Writes results/gp7_loo_tests.csv
 
-The squared residuals are paired day by day. They are serially correlated -- the
+The squared residuals are paired day by day. They are serially correlated. The
 autocorrelation of the paired difference reaches 0.31 at a lag of two days for
 the Matern 3/2 comparison and 0.42 for the Matern 1/2 one, a remnant of the
-spring-neap cycle -- so an ordinary paired t test overstates significance.
+spring-neap cycle. An ordinary paired t test therefore overstates significance.
 Newey-West with a lag of eight days and a moving-block bootstrap both widen the
 standard error.
 """
