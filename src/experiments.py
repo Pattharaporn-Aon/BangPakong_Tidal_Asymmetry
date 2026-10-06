@@ -5,7 +5,7 @@ what remains, and the removed days are predicted. The design varies the size, th
 position and the shape of what is withheld:
 
   A   one interior block, four sizes at two positions        =  8
-  B   one block at the end, so the model predicts forward    =  4
+  B   one block at the end, predicted forward                =  4
   C1  the 75-day summer window, per year where complete      =  5
   C2  the 39-day winter window, per year where complete      =  5
   D   runs of one to ten days scattered through the record   =  4
